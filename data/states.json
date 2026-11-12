@@ -1,14 +1,59 @@
+
 [
   {
     "name": "Texas",
     "abbreviation": "TX",
     "capital": "Austin",
+    "nickname": "The Lone Star State",
+    "motto": "Friendship",
+    "statehood": {
+      "date": "1845-12-29",
+      "year": 1845,
+      "order": 28
+    },
+    "symbols": {
+      "bird": "Northern Mockingbird",
+      "flower": "Bluebonnet",
+      "tree": "Pecan",
+      "mammal": "Texas Longhorn",
+      "reptile": "Texas Horned Lizard",
+      "fruit": "Texas Red Grapefruit"
+    },
+    "funFacts": [
+      "Texas was once an independent country known as the Republic of Texas.",
+      "Texas joined the United States as the 28th state.",
+      "The Texas state motto is Friendship.",
+      "The pecan is both the official state tree and state health nut."
+    ],
     "flag": "images/flags/texas.jpg"
   },
   {
     "name": "Oklahoma",
     "abbreviation": "OK",
     "capital": "Oklahoma City",
+    "nickname": "The Sooner State",
+    "motto": "Labor Omnia Vincit",
+    "mottoTranslation": "Labor Conquers All Things",
+    "statehood": {
+      "date": "1907-11-16",
+      "year": 1907,
+      "order": 46
+    },
+    "symbols": {
+      "bird": "Scissor-tailed Flycatcher",
+      "flower": "Oklahoma Rose",
+      "floralEmblem": "Mistletoe",
+      "tree": "Eastern Redbud",
+      "animal": "American Bison",
+      "wildflower": "Indian Blanket",
+      "instrument": "Fiddle"
+    },
+    "funFacts": [
+      "Oklahoma became the 46th state on November 16, 1907.",
+      "The state flag features an Osage warrior's shield.",
+      "Oklahoma has 77 counties.",
+      "The name Oklahoma comes from Choctaw words meaning red people."
+    ],
     "flag": "images/flags/oklahoma.jpg"
   }
 ]
