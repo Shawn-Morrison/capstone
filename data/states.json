@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Texas",
+    "abbreviation": "TX",
+    "capital": "Austin",
+    "flag": "images/flags/texas.jpg"
+  },
+  {
+    "name": "Oklahoma",
+    "abbreviation": "OK",
+    "capital": "Oklahoma City",
+    "flag": "images/flags/oklahoma.jpg"
+  }
+]
