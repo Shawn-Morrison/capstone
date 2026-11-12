@@ -181,9 +181,7 @@ continueButton.addEventListener("click", () => {
         return;
     }
 
-    alert(
-        `Welcome, ${activePlayer.name}!\n\nYour game screen will be available in the next development stage.`
-    );
+    window.location.href = "./game.html";
 
 });
 

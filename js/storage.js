@@ -183,4 +183,82 @@ export function deletePlayer(playerId) {
     if (localStorage.getItem(ACTIVE_PLAYER_KEY) === playerId) {
         localStorage.removeItem(ACTIVE_PLAYER_KEY);
     }
+
+}
+
+/*
+ * Record a new state discovery for the active player.
+ * Each state can only award points once per player.
+ */
+
+export function recordStateDiscovery(stateAbbreviation) {
+
+    const abbreviation = String(stateAbbreviation)
+        .trim()
+        .toUpperCase();
+
+    const players = getPlayers();
+
+    const activeId = localStorage.getItem(ACTIVE_PLAYER_KEY);
+
+    const playerIndex = players.findIndex(
+        player => player.id === activeId
+    );
+
+    if (playerIndex === -1) {
+        throw new Error("No active player was found.");
+    }
+
+    const player = players[playerIndex];
+
+    if (!Array.isArray(player.discoveredStates)) {
+        player.discoveredStates = [];
+    }
+
+    if (!Array.isArray(player.sightings)) {
+        player.sightings = [];
+    }
+
+    // Check whether this player already collected this state
+    const alreadyCollected = player.discoveredStates.some(
+        state => state.toUpperCase() === abbreviation
+    );
+
+    if (alreadyCollected) {
+
+        return {
+            success: false,
+            alreadyCollected: true,
+            pointsAwarded: 0,
+            player: player
+        };
+
+    }
+
+    // Add the newly discovered state
+    player.discoveredStates.push(abbreviation);
+
+    // Award 10 points
+    const pointsAwarded = 10;
+
+    player.totalPoints =
+        (Number(player.totalPoints) || 0) + pointsAwarded;
+
+    // Record the discovery
+    player.sightings.push({
+        state: abbreviation,
+        pointsAwarded: pointsAwarded,
+        date: new Date().toISOString()
+    });
+
+    // Save updated player information
+    savePlayers(players);
+
+    return {
+        success: true,
+        alreadyCollected: false,
+        pointsAwarded: pointsAwarded,
+        player: player
+    };
+
 }

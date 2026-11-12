@@ -495,3 +495,303 @@ input:focus-visible {
     }
 
 }
+
+/* =====================================
+   GAME DASHBOARD
+===================================== */
+
+.dashboard-heading {
+    margin-bottom: 25px;
+}
+
+.dashboard-eyebrow {
+    color: var(--success);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.dashboard-heading h1 {
+    color: var(--primary);
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.dashboard-heading p {
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.switch-player-link {
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* Statistics */
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 12px;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.stat-card strong {
+    display: block;
+    color: var(--primary);
+    font-size: 30px;
+    margin-top: 5px;
+}
+
+
+/* Collection Progress */
+
+.collection-progress {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 25px;
+}
+
+.progress-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.progress-heading h2 {
+    font-size: 17px;
+    margin: 0;
+}
+
+.progress-heading span {
+    color: var(--success);
+    font-weight: bold;
+}
+
+
+/* Discovery Section */
+
+.discovery-section {
+    margin-bottom: 30px;
+}
+
+.discovery-button {
+    min-height: 60px;
+    font-size: 18px;
+}
+
+.discovery-panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 15px;
+}
+
+.discovery-panel h2 {
+    font-size: 20px;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.discovery-panel > p {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.discovery-panel label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 18px 0 7px;
+}
+
+.discovery-panel select {
+    width: 100%;
+    min-height: 50px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    color: var(--text);
+}
+
+.discovery-panel h3 {
+    font-size: 16px;
+    margin: 22px 0 12px;
+}
+
+
+/* Selected State Preview */
+
+.selected-state-preview {
+    background: var(--background);
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 14px;
+    font-size: 13px;
+}
+
+.selected-state-preview h3 {
+    color: var(--primary);
+    font-size: 17px;
+    margin: 0 0 7px;
+}
+
+.selected-state-preview p {
+    margin: 4px 0;
+    color: var(--muted);
+}
+
+
+/* License Plate Selection Grid */
+
+.plate-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.plate-option {
+    min-width: 0;
+    padding: 10px;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.plate-option img {
+    display: block;
+    width: 100%;
+    height: 65px;
+    object-fit: contain;
+}
+
+.plate-option span {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.plate-option small {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.plate-option.active {
+    border-color: var(--success);
+    background: #edf7f1;
+}
+
+.plate-option.collected {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #eef0f2;
+}
+
+.plate-option:disabled {
+    cursor: not-allowed;
+}
+
+.discovery-message {
+    min-height: 20px;
+    color: var(--success);
+    font-size: 14px;
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+
+/* Collected States */
+
+.collected-section {
+    margin-top: 30px;
+}
+
+.collected-section h2 {
+    font-size: 20px;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.section-description {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.collection-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.collected-state-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.collected-state-card img {
+    width: 65px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.collected-state-card span {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* Responsive adjustments */
+
+@media (min-width: 600px) {
+
+    .dashboard-heading h1 {
+        font-size: 36px;
+    }
+
+    .plate-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .collection-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+}

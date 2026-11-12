@@ -25,7 +25,8 @@
       "The Texas state motto is Friendship.",
       "The pecan is both the official state tree and state health nut."
     ],
-    "flag": "images/flags/texas.jpg"
+    "flag": "images/flags/texas.jpg",
+    "plateImage": "images/plates/texas.png"
   },
   {
     "name": "Oklahoma",
@@ -54,6 +55,7 @@
       "Oklahoma has 77 counties.",
       "The name Oklahoma comes from Choctaw words meaning red people."
     ],
-    "flag": "images/flags/oklahoma.jpg"
+    "flag": "images/flags/oklahoma.jpg",
+    "plateImage": "images/plates/oklahoma.png"
   }
 ]
