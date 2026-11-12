@@ -1,25 +1,50 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>License Plate Collector</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./js/app.js"></script>
 </head>
 
 <body>
 
-    <header>
-        <h1>License Plate Collector</h1>
-        <p>Collect all 50 states!</p>
-    </header>
+    <main class="welcome-container">
 
-    <main>
-        <section id="stateContainer"></section>
+        <div class="welcome-content">
+
+            <div class="app-icon">50</div>
+
+            <h1>License Plate Collector</h1>
+
+            <p class="welcome-description">
+                The ultimate road trip challenge!
+                Collect license plates from all 50 states,
+                earn points, and compete with family.
+            </p>
+
+            <div class="welcome-buttons">
+
+                <a href="./players.html" class="btn btn-primary">
+                    Start Playing
+                </a>
+
+                <a href="./leaderboard.html" class="btn btn-secondary">
+                    View Leaderboard
+                </a>
+
+            </div>
+
+            <p id="welcome-player" class="welcome-player"></p>
+
+        </div>
+
     </main>
-
-    <script type="module" src="js/app.js"></script>
 
 </body>
 </html>

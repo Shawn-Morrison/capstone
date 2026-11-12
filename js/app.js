@@ -1,21 +1,11 @@
 
-import { getStates } from "./states.js";
+import { getActivePlayer } from "./storage.js";
 
-async function initializeApp() {
-    const states = await getStates();
+const welcomePlayer = document.getElementById("welcome-player");
 
-    const stateContainer = document.getElementById("stateContainer");
+const activePlayer = getActivePlayer();
 
-    stateContainer.innerHTML = states.map(state => `
-        <div class="state-card">
-            <img src="${state.flag}" alt="${state.name} flag">
-
-            <h2>${state.name}</h2>
-
-            <p>${state.abbreviation}</p>
-            <p>Capital: ${state.capital}</p>
-        </div>
-    `).join("");
+if (activePlayer) {
+    welcomePlayer.textContent =
+        `Welcome back, ${activePlayer.name}!`;
 }
-
-initializeApp();
