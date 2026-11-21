@@ -21,18 +21,14 @@ const progressFill = document.getElementById("progress-fill");
 const foundPlateButton = document.getElementById("found-plate-button");
 const discoveryPanel = document.getElementById("discovery-panel");
 
-const stateSelect = document.getElementById("state-select");
 const plateGrid = document.getElementById("plate-grid");
 
-const selectedStatePreview = document.getElementById(
-    "selected-state-preview"
-);
-
 const addStateButton = document.getElementById("add-state-button");
-const cancelButton = document.getElementById("cancel-discovery-button");
+const cancelButton = document.getElementById("close-discovery-button");
 
 const discoveryMessage = document.getElementById("discovery-message");
-const collectionList = document.getElementById("collection-list");
+const discoveryPlayerName = document.getElementById("discovery-player-name");
+const viewCollectionLink = document.getElementById("view-collection-link");
 
 
 // =====================================
@@ -433,6 +429,10 @@ foundPlateButton.addEventListener("click", () => {
 
     discoveryMessage.textContent = "";
 
+    if (!discoveryPanel.hidden) {
+        renderPlateGrid();
+    }
+
 });
 
 cancelButton.addEventListener("click", () => {
@@ -441,26 +441,37 @@ cancelButton.addEventListener("click", () => {
 
     selectedStateCode = "";
 
-    stateSelect.value = "";
-
     addStateButton.disabled = true;
-
-    discoveryMessage.textContent = "";
 
     renderPlateGrid();
 
-    renderStatePreview();
-
 });
 
-stateSelect.addEventListener("change", () => {
+addStateButton.addEventListener("click", () => {
 
-    selectState(stateSelect.value);
+    if (!selectedStateCode) {
+        return;
+    }
+
+    const result = recordStateDiscovery(selectedStateCode);
+
+    if (result) {
+
+        discoveryMessage.textContent = "Plate added to your collection!";
+
+        addStateButton.disabled = true;
+
+        viewCollectionLink.hidden = false;
+
+        selectedStateCode = "";
+
+        renderPlateGrid();
+
+        updateDashboard();
+
+    }
 
 });
-
-addStateButton.addEventListener("click", addStateToCollection);
-
 
 // =====================================
 // START APPLICATION
