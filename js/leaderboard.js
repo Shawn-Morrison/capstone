@@ -1,108 +1,89 @@
 
 import { getPlayers } from "./storage.js";
 
+const podium = document.getElementById("leaderboard-podium");
 const leaderboardList = document.getElementById("leaderboard-list");
 
 function renderLeaderboard() {
+    const players = getPlayers()
+        .sort((a, b) => {
+            const pointDifference =
+                (Number(b.totalPoints) || 0) - (Number(a.totalPoints) || 0);
 
-    const players = getPlayers();
+            if (pointDifference !== 0) return pointDifference;
 
+            return (b.discoveredStates?.length || 0) -
+                (a.discoveredStates?.length || 0);
+        });
+
+    podium.innerHTML = "";
     leaderboardList.innerHTML = "";
 
-    if (players.length === 0) {
-
-        const emptyMessage = document.createElement("div");
-
-        emptyMessage.className = "empty-message";
-
-        emptyMessage.textContent =
-            "No players yet! Create a player profile to start competing.";
-
-        leaderboardList.appendChild(emptyMessage);
-
+    if (!players.length) {
+        leaderboardList.textContent =
+            "No players yet. Create a profile to start competing.";
         return;
-
     }
 
-    // Sort by points, then by unique states discovered
-    players.sort((a, b) => {
+    const podiumOrder = [1, 0, 2];
 
-        if (b.totalPoints !== a.totalPoints) {
-            return b.totalPoints - a.totalPoints;
-        }
+    podiumOrder.forEach(index => {
+        const player = players[index];
 
-        return b.discoveredStates.length - a.discoveredStates.length;
+        if (!player) return;
 
+        const card = document.createElement("div");
+        card.className = `podium-card podium-${index + 1}`;
+
+        const rank = document.createElement("span");
+        rank.className = "podium-rank";
+        rank.textContent = index === 0 ? "1ST" : index === 1 ? "2ND" : "3RD";
+
+        const avatar = document.createElement("span");
+        avatar.className = "podium-avatar";
+        avatar.textContent = player.name.charAt(0).toUpperCase();
+
+        const name = document.createElement("strong");
+        name.textContent = player.name;
+
+        const points = document.createElement("small");
+        points.textContent = `${player.totalPoints || 0} pts`;
+
+        card.append(rank, avatar, name, points);
+        podium.appendChild(card);
     });
 
     players.forEach((player, index) => {
-
-        const discoveredCount = player.discoveredStates.length;
-
-        const percentage = Math.min(
-            100,
-            (discoveredCount / 50) * 100
-        );
-
         const card = document.createElement("article");
+        card.className = "leaderboard-row";
 
-        card.className = "leaderboard-card";
+        const rank = document.createElement("span");
+        rank.className = "leaderboard-number";
+        rank.textContent = `0${index + 1}`;
 
-        const rank = document.createElement("div");
-        rank.className = "leaderboard-rank";
-        rank.textContent = `#${index + 1}`;
+        const avatar = document.createElement("span");
+        avatar.className = "leaderboard-avatar";
+        avatar.textContent = player.name.charAt(0).toUpperCase();
 
-        const details = document.createElement("div");
-        details.className = "leaderboard-details";
+        const details = document.createElement("span");
+        details.className = "leaderboard-player-details";
 
-        const name = document.createElement("h2");
+        const name = document.createElement("strong");
         name.textContent = player.name;
 
-        const stats = document.createElement("p");
+        const states = document.createElement("small");
+        states.textContent =
+            `${player.discoveredStates?.length || 0} states collected`;
 
-        stats.textContent =
-            `${discoveredCount} of 50 states discovered`;
+        details.append(name, states);
 
-        const progressContainer = document.createElement("div");
-        progressContainer.className = "progress-container";
+        const score = document.createElement("strong");
+        score.className = "leaderboard-score";
+        score.textContent = `${player.totalPoints || 0} pts`;
 
-        const progressBar = document.createElement("div");
-        progressBar.className = "progress-bar";
-
-        progressBar.style.width = `${percentage}%`;
-
-        progressContainer.appendChild(progressBar);
-
-        const percentageText = document.createElement("p");
-        percentageText.className = "progress-text";
-
-        percentageText.textContent =
-            `${percentage.toFixed(0)}% collected`;
-
-        details.append(
-            name,
-            stats,
-            progressContainer,
-            percentageText
-        );
-
-        const points = document.createElement("div");
-        points.className = "leaderboard-points";
-
-        const pointValue = document.createElement("strong");
-        pointValue.textContent = player.totalPoints.toLocaleString();
-
-        const pointLabel = document.createElement("span");
-        pointLabel.textContent = "POINTS";
-
-        points.append(pointValue, pointLabel);
-
-        card.append(rank, details, points);
-
+        card.append(rank, avatar, details, score);
         leaderboardList.appendChild(card);
-
     });
-
 }
 
 renderLeaderboard();
