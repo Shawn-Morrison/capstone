@@ -5,7 +5,6 @@ const welcomePlayer = document.getElementById("welcome-player");
 
 const activePlayer = getActivePlayer();
 
-if (activePlayer) {
-    welcomePlayer.textContent =
-        `Welcome back, ${activePlayer.name}!`;
+if (activePlayer && welcomePlayer) {
+    welcomePlayer.textContent = `Welcome back, ${activePlayer.name}!`;
 }
