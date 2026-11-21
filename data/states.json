@@ -57,5 +57,32 @@
     ],
     "flag": "images/flags/oklahoma.jpg",
     "plateImage": "images/plates/oklahoma.png"
+  },
+  {
+    "name": "Colorado",
+    "abbreviation": "CO",
+    "capital": "Denver",
+    "nickname": "The Centennial State",
+    "motto": "Nil Sine Numine",
+    "mottoTranslation": "Nothing Without the Deity",
+    "statehood": {
+      "date": "1876-08-01",
+      "year": 1876,
+      "order": 38
+    },
+    "symbols": {
+      "bird": "Lark Bunting",
+      "flower": "Rocky Mountain Columbine",
+      "tree": "Colorado Blue Spruce",
+      "animal": "Rocky Mountain Bighorn Sheep",
+      "fossil": "Stegosaurus"
+    },
+    "funFacts": [
+      "Colorado became the 38th state on August 1, 1876, the 100th anniversary of the Declaration of Independence.",
+      "Colorado has the highest average elevation of any U.S. state.",
+      "The Stegosaurus became Colorado's official state fossil after fourth-grade students campaigned for it."
+    ],
+    "flag": "images/flags/colorado.jpg",
+    "plateImage": "images/plates/colorado.png"
   }
 ]
