@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#414833">
+    <title>State Details | License Plate Scavenger Hunt</title>
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./js/state.js"></script>
+</head>
+<body class="app-page state-page">
+
+    <main class="page-shell">
+
+        <header class="state-hero" id="state-hero">
+            <div class="state-top-actions">
+                <a href="./collection.html" class="state-back-icon" aria-label="Back to collection">‹</a>
+                <a href="./game.html" class="state-home-icon" aria-label="Return to game">⌂</a>
+            </div>
+
+            <p class="eyebrow light-eyebrow">COLLECTED STATE</p>
+            <h1 id="state-name">Loading...</h1>
+            <p id="state-nickname" class="state-nickname"></p>
+            <img id="state-plate-image" class="state-plate-image" src="" alt="">
+        </header>
+
+        <section class="state-facts-body">
+            <div class="state-capital-card">
+                <img id="state-flag-image" src="" alt="State flag">
+                <div>
+                    <span>STATE CAPITAL</span>
+                    <strong id="state-capital">—</strong>
+                </div>
+                <small id="state-abbreviation">—</small>
+            </div>
+
+            <p class="eyebrow">TRAIL NOTES</p>
+            <h2>Things worth knowing</h2>
+
+            <div id="state-facts-list" class="state-facts-list"></div>
+
+            <a href="./collection.html" class="btn btn-secondary state-back-button">
+                ‹ Back to collection
+            </a>
+            <a href="./game.html" class="return-game-link">Return to game</a>
+        </section>
+
+    </main>
+
+</body>
+</html>
