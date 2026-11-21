@@ -2,48 +2,37 @@
 const PLAYER_STORAGE_KEY = "licensePlateCollector_players";
 const ACTIVE_PLAYER_KEY = "licensePlateCollector_activePlayer";
 
-const MAX_PLAYERS = 2;
+const MAX_PLAYERS = 4;
 
-// Retrieve all saved players
 export function getPlayers() {
     try {
         const savedPlayers = localStorage.getItem(PLAYER_STORAGE_KEY);
 
-        if (!savedPlayers) {
-            return [];
-        }
+        if (!savedPlayers) return [];
 
         const players = JSON.parse(savedPlayers);
 
         return Array.isArray(players) ? players : [];
-
     } catch (error) {
         console.error("Unable to retrieve players:", error);
         return [];
     }
 }
 
-// Save all players
 export function savePlayers(players) {
     if (!Array.isArray(players)) {
         throw new Error("Player data must be an array.");
     }
 
     try {
-        localStorage.setItem(
-            PLAYER_STORAGE_KEY,
-            JSON.stringify(players)
-        );
-
+        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(players));
         return true;
-
     } catch (error) {
         console.error("Unable to save players:", error);
         throw new Error("Your player information could not be saved.");
     }
 }
 
-// Generate a unique player ID
 function generatePlayerId() {
     if (crypto.randomUUID) {
         return crypto.randomUUID();
@@ -52,7 +41,6 @@ function generatePlayerId() {
     return "player_" + Date.now() + "_" + Math.random();
 }
 
-// Create a new player
 export function createPlayer(name) {
     const trimmedName = name.trim();
 
@@ -63,10 +51,9 @@ export function createPlayer(name) {
     const players = getPlayers();
 
     if (players.length >= MAX_PLAYERS) {
-        throw new Error("The maximum of two players has been reached.");
+        throw new Error("All four player slots are occupied.");
     }
 
-    // Prevent duplicate names, ignoring capitalization
     const duplicate = players.some(
         player => player.name.toLowerCase() === trimmedName.toLowerCase()
     );
@@ -87,26 +74,19 @@ export function createPlayer(name) {
     players.push(newPlayer);
 
     savePlayers(players);
-
-    // Automatically make the new player active
     setActivePlayer(newPlayer.id);
 
     return newPlayer;
 }
 
-// Retrieve the active player
 export function getActivePlayer() {
     const activeId = localStorage.getItem(ACTIVE_PLAYER_KEY);
 
-    if (!activeId) {
-        return null;
-    }
+    if (!activeId) return null;
 
     const players = getPlayers();
 
-    const activePlayer = players.find(
-        player => player.id === activeId
-    );
+    const activePlayer = players.find(player => player.id === activeId);
 
     if (!activePlayer) {
         localStorage.removeItem(ACTIVE_PLAYER_KEY);
@@ -116,13 +96,10 @@ export function getActivePlayer() {
     return activePlayer;
 }
 
-// Set the active player
 export function setActivePlayer(playerId) {
     const players = getPlayers();
 
-    const playerExists = players.some(
-        player => player.id === playerId
-    );
+    const playerExists = players.some(player => player.id === playerId);
 
     if (!playerExists) {
         throw new Error("Player could not be found.");
@@ -131,7 +108,6 @@ export function setActivePlayer(playerId) {
     localStorage.setItem(ACTIVE_PLAYER_KEY, playerId);
 }
 
-// Update an existing player
 export function updatePlayer(updatedPlayer) {
     const players = getPlayers();
 
@@ -170,7 +146,6 @@ export function updatePlayer(updatedPlayer) {
     return players[index];
 }
 
-// Delete a player
 export function deletePlayer(playerId) {
     const players = getPlayers();
 
@@ -183,22 +158,12 @@ export function deletePlayer(playerId) {
     if (localStorage.getItem(ACTIVE_PLAYER_KEY) === playerId) {
         localStorage.removeItem(ACTIVE_PLAYER_KEY);
     }
-
 }
 
-/*
- * Record a new state discovery for the active player.
- * Each state can only award points once per player.
- */
-
 export function recordStateDiscovery(stateAbbreviation) {
-
-    const abbreviation = String(stateAbbreviation)
-        .trim()
-        .toUpperCase();
+    const abbreviation = String(stateAbbreviation).trim().toUpperCase();
 
     const players = getPlayers();
-
     const activeId = localStorage.getItem(ACTIVE_PLAYER_KEY);
 
     const playerIndex = players.findIndex(
@@ -219,46 +184,39 @@ export function recordStateDiscovery(stateAbbreviation) {
         player.sightings = [];
     }
 
-    // Check whether this player already collected this state
     const alreadyCollected = player.discoveredStates.some(
-        state => state.toUpperCase() === abbreviation
+        state => String(state).toUpperCase() === abbreviation
     );
 
     if (alreadyCollected) {
-
         return {
             success: false,
             alreadyCollected: true,
             pointsAwarded: 0,
-            player: player
+            player
         };
-
     }
 
-    // Add the newly discovered state
     player.discoveredStates.push(abbreviation);
 
-    // Award 10 points
     const pointsAwarded = 10;
 
-    player.totalPoints =
-        (Number(player.totalPoints) || 0) + pointsAwarded;
+    player.totalPoints = (Number(player.totalPoints) || 0) + pointsAwarded;
 
-    // Record the discovery
     player.sightings.push({
         state: abbreviation,
-        pointsAwarded: pointsAwarded,
+        pointsAwarded,
         date: new Date().toISOString()
     });
 
-    // Save updated player information
     savePlayers(players);
 
     return {
         success: true,
         alreadyCollected: false,
-        pointsAwarded: pointsAwarded,
-        player: player
+        pointsAwarded,
+        player
     };
-
 }
+
+export { MAX_PLAYERS };
