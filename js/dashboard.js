@@ -16,7 +16,7 @@ const totalPoints = document.getElementById("total-points");
 const stateCount = document.getElementById("state-count");
 
 const progressText = document.getElementById("progress-text");
-const progressFill = document.getElementById("progress-fill");
+const progressRing = document.getElementById("progress-ring");
 
 const foundPlateButton = document.getElementById("found-plate-button");
 const discoveryPanel = document.getElementById("discovery-panel");
@@ -109,7 +109,7 @@ function renderDashboard() {
 
     progressText.textContent = `${percentage.toFixed(0)}%`;
 
-    progressFill.style.width = `${percentage}%`;
+   progressRing.style.setProperty("--progress", `${percentage * 3.6}deg`);
 
     renderCollection();
 
@@ -199,18 +199,12 @@ function renderPlateGrid() {
         plateImage.alt = `${state.name} license plate`;
 
         const stateName = document.createElement("span");
+stateName.textContent = state.name;
 
-        stateName.textContent = state.name;
-
-        const status = document.createElement("small");
-
-        status.textContent = collected ? "Collected" : "Available";
-
-        plateCard.append(
-            plateImage,
-            stateName,
-            status
-        );
+plateCard.append(
+    plateImage,
+    stateName
+);
 
         plateCard.addEventListener("click", () => {
 
@@ -230,22 +224,18 @@ function renderPlateGrid() {
 
 
 // =====================================
-// SELECT A STATE
+// SELECT A LICENSE PLATE
 // =====================================
 
-function selectState(stateCode) {
+function selectState(stateAbbreviation) {
 
-    selectedStateCode = stateCode;
+    selectedStateCode = stateAbbreviation;
 
-    stateSelect.value = stateCode;
+    addStateButton.disabled = false;
 
     discoveryMessage.textContent = "";
 
-    addStateButton.disabled = !stateCode;
-
     renderPlateGrid();
-
-    renderStatePreview();
 
 }
 
